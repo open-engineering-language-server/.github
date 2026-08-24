@@ -225,7 +225,7 @@ Suggest valid:
 
 For example:
 
-dependencies:
+### dependencies:
   -
 
 could offer compatible registered dependencies instead of arbitrary text.
