@@ -14,52 +14,52 @@ If Open Engineering knows it, your development environment should know it too.
 
 ⸻
 
-Why Language Server?
+## Why Language Server?
 
 Open Engineering describes an engineering landscape in machine-readable form.
-
+```
 Definitions describe what things are.
 Conventions describe how they are expressed.
 Schemas describe their structure.
 Identifiers give them stable identities.
 Registries tell us what exists.
 The Open Engineering Map tells us how things relate.
-
+```
 That knowledge should not remain hidden in repositories and documentation.
 
 It should be available while engineering.
 
 Consider an Open Engineering document:
-
+```
 apiVersion: open-engineering.io/v1
 kind: Pico
 metadata:
   name: hello-pico
 spec:
-
+```
 At spec:, an Open Engineering-aware editor should already know what can come next.
 
 It might offer:
-
+```
 runtime
 capabilities
 state
 interfaces
 dependencies
-
+```
 When a property is selected, the editor should understand its expected type, documentation, constraints, relationships, and valid references.
 
 Open Engineering Language Server makes that possible.
 
 ⸻
 
-The Vision
+## The Vision
 
 We want the Open Engineering Ecosystem to behave, from an engineer’s perspective, like one enormous typed program.
 
 A reference such as:
 
-runtime: oee.runtime.celld.default
+`runtime: oee.runtime.celld.default`
 
 should not merely be a string.
 
@@ -82,7 +82,7 @@ The Language Server turns Open Engineering metadata into that interactive engine
 
 ⸻
 
-From Schema to Engineering Intelligence
+## From Schema to Engineering Intelligence
 
 At its simplest, Open Engineering Language Server provides schema-aware editing.
 
@@ -107,14 +107,14 @@ A property might not merely be a string.
 It might be a reference to another Open Engineering entity.
 
 For example:
-
+```
 runtime:
   type: string
   description: Runtime responsible for executing this Pico.
   x-open-engineering:
     reference:
       kind: PicoRuntime
-
+```
 Standard JSON Schema tooling can ignore x-open-engineering.
 
 Open Engineering Language Server can understand it.
@@ -125,28 +125,28 @@ validation contract + documentation source + type definition + IDE intelligence 
 
 ⸻
 
-Open Engineering References
+## Open Engineering References
 
 Consider:
-
+```
 kind: Pico
 spec:
   runtime:
-
+```
 The schema may declare that runtime expects a reference to a PicoRuntime.
 
 Instead of suggesting arbitrary strings, the Language Server can query Open Engineering knowledge and offer known compatible entities.
 
 For example:
-
+```
 oee.runtime.pico.default
 oee.runtime.celld.default
 oee.runtime.local.development
-
+```
 The same applies to artifacts, capabilities, interfaces, observers, definitions, components, services, packages, and other Open Engineering entities.
 
 This gives the ecosystem something analogous to a distributed type system.
-
+```
 Pico
  │
  ├── runsOn ───────────────► PicoRuntime
@@ -160,12 +160,12 @@ Pico
  ├── requires ─────────────► Capability
  │
  └── observedBy ───────────► Observer
-
+```
 Open Engineering relationships become IDE-understandable relationships.
 
 ⸻
 
-Architecture
+## Architecture
 
 Open Engineering Language Server sits between the engineering knowledge of the ecosystem and the tools in which engineers work.
 
