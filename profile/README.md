@@ -168,7 +168,7 @@ Open Engineering relationships become IDE-understandable relationships.
 ## Architecture
 
 Open Engineering Language Server sits between the engineering knowledge of the ecosystem and the tools in which engineers work.
-
+```
 Open Engineering Definitions
              │
 Open Engineering Conventions
@@ -197,14 +197,14 @@ Open Engineering Registries   Open Engineering Map
         ┌───────────────┼───────────────┐
         ▼               ▼               ▼
       Editors           IDEs         AI tooling
-
+```
 The Language Server Protocol keeps the core intelligence independent from any particular editor.
 
 Editor-specific integrations should therefore remain deliberately thin.
 
 ⸻
 
-Capabilities
+## Capabilities
 
 The Language Server is intended to progressively support the standard capabilities developers expect from modern programming environments.
 
@@ -230,50 +230,50 @@ dependencies:
 
 could offer compatible registered dependencies instead of arbitrary text.
 
-Hover
+### Hover
 
 Hovering over:
 
 runtime: oee.runtime.celld.default
 
 could show:
-
+```
 Celld Runtime
 Kind: PicoRuntime
 Identifier: oee.runtime.celld.default
 Durable execution runtime compatible with
 the Pico execution model.
 Go to definition →
-
-Diagnostics
+```
+### Diagnostics
 
 Detect problems while editing:
-
+```
 Unknown Open Engineering identifier
 oee.runtime.celld.defualt
                   ^^^^^^^
-
+```
 or:
-
+```
 Incompatible reference
 Expected: PicoRuntime
 Received: Artifact
-
-Go to Definition
+```
+### Go to Definition
 
 A referenced Open Engineering identifier should be navigable to the repository, metadata, schema, or definition that declares it.
 
-Find References
+### Find References
 
 Given an entity, discover where it is used throughout the Open Engineering landscape.
 
 This turns ecosystem relationships into navigable engineering information.
 
-Signature Help
+### Signature Help
 
 Where Open Engineering structures behave like typed interfaces, show the expected properties and their meaning while the engineer is composing them.
 
-Semantic Highlighting
+### Semantic Highlighting
 
 Editors may visually distinguish:
 
@@ -285,44 +285,44 @@ Editors may visually distinguish:
 * relationships;
 * deprecated elements.
 
-Code Actions
+### Code Actions
 
 Where safe, diagnostics should be actionable.
 
 For example:
-
+```
 Unknown property: dependancies
 Quick Fix:
 → Rename to "dependencies"
-
-Rename
+```
+### Rename
 
 Where Open Engineering’s identifier and registry rules permit it, identifier changes should eventually support safe ecosystem-aware refactoring.
 
 ⸻
 
-Context-Aware Completion
+## Context-Aware Completion
 
 Schema completion is only the beginning.
 
 Consider:
-
+```
 kind: Pico
 spec:
   language: python
   runtime: celld
   artifact:
-
+```
 The Language Server has several pieces of context:
-
+```
 kind     = Pico
 language = Python
 runtime  = Celld
-
+```
 It should therefore not suggest every known artifact.
 
 It should progressively narrow candidates to artifacts that satisfy the surrounding engineering constraints.
-
+```
 Schema
    +
 Definitions
@@ -337,7 +337,7 @@ Compatibility Rules
         │
         ▼
 Context-aware completion
-
+```
 The distinction is important.
 
 A schema tells us:
@@ -350,7 +350,7 @@ What can actually work here?
 
 ⸻
 
-Cross-Repository Intelligence
+## Cross-Repository Intelligence
 
 Open Engineering is intentionally distributed across many repositories and organizations.
 
@@ -358,14 +358,14 @@ That should not mean the engineer has to mentally reconstruct those relationship
 
 Repositories expose machine-readable metadata such as:
 
-open-engineering-*/source/metadata.yaml
+`open-engineering-*/source/metadata.yaml`
 
 The Open Engineering Map can aggregate this information into a connected representation of the ecosystem.
 
 The Language Server can consume that representation to provide cross-repository intelligence.
 
 An engineer working in one repository can therefore discover compatible entities defined somewhere else without leaving the editor.
-
+```
 Repository A
     │
     │ metadata.yaml
@@ -375,32 +375,32 @@ Open Engineering Map
     │ metadata.yaml
     │
 Repository B
-
+```
 To the engineer, these distributed repositories increasingly behave as one connected engineering environment.
 
 ⸻
 
-Beyond YAML
+## Beyond YAML
 
 Open Engineering intelligence should not be restricted to Open Engineering manifests.
 
 An Open Engineering identifier can occur in source code.
 
-Python
-
+### Python
+```
 @pico("oee.pico.hello")
 class HelloPico:
     ...
-
-Rust
-
+```
+### Rust
+```
 #[open_engineering::pico("oee.pico.hello")]
 pub struct HelloPico;
-
-TypeScript
-
+```
+### TypeScript
+```
 const pico = oe.pico("oee.pico.hello");
-
+```
 The Language Server can eventually recognize these references and provide the same navigation and information regardless of the host language.
 
 Open Engineering therefore complements rather than replaces existing language tooling.
@@ -413,7 +413,7 @@ Open Engineering Language Server understands the engineering meaning connecting 
 
 ⸻
 
-AI-Assisted Engineering
+## AI-Assisted Engineering
 
 The same structured knowledge that helps humans can help engineering agents.
 
@@ -432,7 +432,7 @@ Instead of asking an AI system to infer the Open Engineering landscape from arbi
 The Language Server can therefore become an important interface between the Open Engineering knowledge model and AI-assisted development environments.
 
 AI assistance and deterministic engineering intelligence should complement each other.
-
+```
                  Engineer
                     │
                     ▼
@@ -446,19 +446,19 @@ AI assistance and deterministic engineering intelligence should complement each 
                     ▼
           Open Engineering
              Knowledge
-
+```
 The schema remains authoritative.
 
 AI helps interpret and compose.
 
 ⸻
 
-Relationship to the Open Engineering Ecosystem
+## Relationship to the Open Engineering Ecosystem
 
 Open Engineering Language Server is not intended to become another source of truth.
 
 It consumes existing Open Engineering sources of truth.
-
+```
 Definitions
      │
      ▼
@@ -481,16 +481,16 @@ Language Server
      │
      ▼
 Engineering Experience
-
+```
 This separation matters.
 
 The Language Server should expose ecosystem knowledge, not redefine it.
 
 ⸻
 
-Design Principles
+## Design Principles
 
-Standards First
+### Standards First
 
 Prefer established standards wherever practical:
 
@@ -503,49 +503,49 @@ Prefer established standards wherever practical:
 
 Open Engineering extensions should augment standards rather than unnecessarily replace them.
 
-Schema-Driven
+### Schema-Driven
 
 Do not hard-code domain knowledge into editor plugins when that knowledge can be expressed through schemas or conventions.
 
-Thin Editor Integrations
+### Thin Editor Integrations
 
 Keep Open Engineering intelligence in the Language Server.
 
 Editor extensions should primarily provide transport, activation, configuration, and user experience integration.
 
-Deterministic Before Generative
+### Deterministic Before Generative
 
 If a schema, registry, relationship, or compatibility rule can answer a question deterministically, use it.
 
 AI assistance can operate on top of this foundation.
 
-Explain Suggestions
+### Explain Suggestions
 
 Where possible, completion should not merely say what can be selected.
 
 It should explain why.
 
 For example:
-
+```
 oee.artifact.python.hello-pico
 ✓ Artifact
 ✓ Python compatible
 ✓ Pico compatible
 ✓ Celld compatible
-
-Graceful Offline Operation
+```
+### Graceful Offline Operation
 
 Local schemas and cached registry/map information should allow useful operation without requiring continuous network connectivity.
 
-Open Ecosystem
+### Open Ecosystem
 
 The protocol and semantics should remain editor-independent and implementation-friendly so other Open Engineering-compatible tools can consume the same intelligence.
 
 ⸻
 
-Implementation Roadmap
+## Implementation Roadmap
 
-Phase 1 — Schema Intelligence
+### Phase 1 — Schema Intelligence
 
 Establish the smallest useful implementation.
 
@@ -561,16 +561,16 @@ Support:
 
 The objective is immediate value with minimal Open Engineering-specific machinery.
 
-Phase 2 — Semantic Extensions
+### Phase 2 — Semantic Extensions
 
 Define the x-open-engineering vocabulary for expressing concepts JSON Schema alone cannot adequately describe.
 
 For example:
-
+```
 x-open-engineering:
   reference:
     kind: Artifact
-
+```
 Add:
 
 * typed references;
@@ -578,7 +578,7 @@ Add:
 * relationship semantics;
 * identifier validation.
 
-Phase 3 — Language Server
+### Phase 3 — Language Server
 
 Implement the dedicated Open Engineering LSP server.
 
@@ -591,13 +591,13 @@ Initial LSP capabilities:
 * document symbols;
 * references.
 
-Phase 4 — Registry Intelligence
+### Phase 4 — Registry Intelligence
 
 Connect the Language Server to Open Engineering Registries.
 
 Completion can now include actual registered entities.
 
-Phase 5 — Map Intelligence
+### Phase 5 — Map Intelligence
 
 Integrate the Open Engineering Map.
 
@@ -609,7 +609,7 @@ Enable:
 * dependency discovery;
 * ecosystem-aware hover information.
 
-Phase 6 — Compatibility Intelligence
+### Phase 6 — Compatibility Intelligence
 
 Evaluate Open Engineering compatibility rules while composing configurations.
 
@@ -621,7 +621,7 @@ to:
 
 everything compatible with this context
 
-Phase 7 — Source-Code Awareness
+### Phase 7 — Source-Code Awareness
 
 Recognize Open Engineering identifiers embedded in:
 
@@ -633,35 +633,35 @@ Recognize Open Engineering identifiers embedded in:
 * configuration;
 * documentation.
 
-Phase 8 — Agent Integration
+### Phase 8 — Agent Integration
 
 Expose deterministic Open Engineering intelligence to AI engineering assistants and agents.
 
 Agents should be able to ask questions such as:
-
+```
 What Artifact kinds are valid here?
 Which PicoRuntime implementations satisfy this requirement?
 Where is this identifier defined?
 What depends on this component?
 Why is this composition invalid?
-
+```
 The same answers presented to humans in the IDE become available to engineering automation.
 
 ⸻
 
-Example Experience
+## Example Experience
 
 Imagine building Hello, Pico!
 
 The engineer writes:
-
+```
 apiVersion: open-engineering.io/v1
 kind: Pico
 metadata:
   name: hello-pico
 spec:
   runtime:
-
+```
 The editor offers compatible Pico runtimes.
 
 The engineer selects:
@@ -694,10 +694,10 @@ The engineer remains inside the development environment while Open Engineering p
 
 ⸻
 
-The Desired Developer Experience
+## The Desired Developer Experience
 
 Open Engineering should progressively make this interaction feel ordinary:
-
+```
 Engineer types
       │
       ▼
@@ -720,14 +720,14 @@ Language Server explains
       │
       ▼
 Engineer composes confidently
-
+```
 The complexity exists in the ecosystem.
 
 It should not have to exist in the engineer’s head.
 
 ⸻
 
-What Belongs Here?
+## What Belongs Here?
 
 The Open Engineering Language Server organization owns implementations concerned with bringing Open Engineering semantic intelligence into development environments.
 
@@ -752,7 +752,7 @@ Authoritative definitions, conventions, schemas, identifiers, registries, and ec
 
 ⸻
 
-What Does Not Belong Here?
+## What Does Not Belong Here?
 
 This organization should not become the authoritative home for:
 
@@ -771,7 +771,7 @@ This organization provides the bridge between them and the engineering environme
 
 ⸻
 
-Success
+## Success
 
 We know Open Engineering Language Server is succeeding when an engineer can encounter an unfamiliar Open Engineering configuration and confidently work with it without first searching through multiple repositories and documentation sites.
 
@@ -795,22 +795,22 @@ What should I compose next?
 
 ⸻
 
-Open Engineering
+## Open Engineering
 
 Open Engineering Language Server is part of the broader Open Engineering Ecosystem — an effort to make engineering knowledge explicit, machine-readable, composable, navigable, and executable.
 
-Definitions give engineering concepts meaning.
+**Definitions** give engineering concepts meaning.
 
-Conventions give them consistency.
+**Conventions** give them consistency.
 
-Schemas give them structure.
+**Schemas** give them structure.
 
-Identifiers give them identity.
+**Identifiers** give them identity.
 
-Registries make them discoverable.
+**Registries** make them discoverable.
 
-The Map connects them.
+**The Map** connects them.
 
-The Language Server brings all of that knowledge to the engineer’s fingertips.
+**The Language Server** brings all of that knowledge to the engineer’s fingertips.
 
 Define it. Connect it. Understand it. Compose it.
